@@ -1,0 +1,58 @@
+.menu {
+  .sidebar {
+    background-color: #2c2f33;
+    width: 19%;
+    min-height: 100vh;
+    overflow: scroll;
+    color: white;
+    .profile {
+      //   margin: 20px 10px;
+      padding: 20px;
+      background-color: #36393e;
+      div {
+        background-color: #2c2f33;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+      }
+    }
+    p {
+      color: #424549;
+      // background-color: #424549;
+    }
+    ul {
+      padding: 0px;
+      color: white;
+      //   background-color: #36393e;
+      .submodule {
+        transition: all ease-in-out 0.3s;
+        background-color: #424549;
+        height: 55px;
+      }
+      .submodule-none {
+        transition: all ease-in-out 0.3s;
+        height: 0px;
+        background-color: #424549;
+        overflow: hidden;
+      }
+      a{
+        text-decoration: none;
+        color: white;
+      }
+      li {
+        text-decoration: none;
+        padding: 15px;
+        list-style: none;
+      }
+      li:hover {
+        cursor: pointer;
+        // background-color: #2c2f33;
+      }
+    }
+  }
+  .nas {
+  }
+  .content {
+    width: 81%;
+  }
+}
