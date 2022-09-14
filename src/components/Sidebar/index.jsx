@@ -3,11 +3,13 @@ import React from "react";
 import "./sidebar.scss";
 import "boxicons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
 const Sidebar = ({ children }) => {
   const [submodule, setSubmodule] = useState(false);
-  console.log(children);
+  const location = useLocation().pathname;
+  const finalLocation = location.slice(1, location.length);
+  console.log(finalLocation);
   const listSidebar = [
     {
       name: "Dashboard",
@@ -20,13 +22,16 @@ const Sidebar = ({ children }) => {
       path: "product",
       submodule: [
         {
-          name: "lorem ipsum",
+          name: "Products",
+          path: "products",
         },
         {
-          name: "lorem ipsum",
+          name: "Category",
+          path: "category",
         },
         {
-          name: "lorem ipsum",
+          name: "Produk SKU",
+          path: "produk-sku",
         },
       ],
     },
@@ -53,17 +58,21 @@ const Sidebar = ({ children }) => {
       </div>
       <div className="d-flex">
         <div className="sidebar">
-          <div className="profile d-flex">
-            <div></div>
-            Dummy
+          <div className="profile d-flex align-items-center justify-content-start">
+            <div className="me-3"></div>
+            User dummy
           </div>
-          <p>Main Navigation</p>
-          <ul>
+          <ul className="">
+            <p className="mt-3 ms-1">PAGES</p>
             {listSidebar.map((res, key) =>
               !res.submodule ? (
                 <Link key={key} to={res.path}>
-                  <li className="d-flex">
-                    <box-icon name={res.icon} color="white"></box-icon>
+                  <li
+                    className={
+                      finalLocation == res.path ? "location d-flex" : "d-flex"
+                    }
+                  >
+                    <box-icon name={res.icon} color="#cfcfcf"></box-icon>
                     {res.name}
                   </li>
                 </Link>
@@ -75,33 +84,45 @@ const Sidebar = ({ children }) => {
                     onClick={() => setSubmodule(!submodule)}
                   >
                     <span className="d-flex align-items-center">
-                      <box-icon name={res.icon} color="white"></box-icon>
+                      <box-icon name={res.icon} color="#cfcfcf"></box-icon>
 
                       {res.name}
                     </span>
                     <box-icon name="chevron-left" color="white"></box-icon>
                   </li>
                   {res.submodule.map((respon, index) => (
-                    <ul className={!submodule ? "submodule-none" : "submodule"}>
-                      <li className="d-flex align-items-center">
-                        <box-icon
-                          type="solid"
-                          name="circle"
-                          color="white"
-                          size="sm"
-                        ></box-icon>
-                        {respon.name}
-                      </li>
+                    <ul
+                      className={!submodule ? "submodule-none" : "submodule"}
+                      key={index}
+                    >
+                      <Link to={respon.path}>
+                        <li
+                          className={
+                            finalLocation == respon.path
+                              ? "location d-flex align-items-center"
+                              : "d-flex align-items-center"
+                          }
+                        >
+                          <box-icon
+                            type="solid"
+                            name="circle"
+                            color="#cfcfcf"
+                            size="sm"
+                          ></box-icon>
+                          {respon.name}
+                        </li>
+                      </Link>
                     </ul>
                   ))}
                 </>
               )
             )}
           </ul>
-          <p>Setting</p>
           <ul>
+            <p className="mt-4 ms-1">SETTING</p>
+
             {listSetting.map((res, key) => (
-              <li>{res.name}</li>
+              <li key={key}>{res.name}</li>
             ))}
           </ul>
         </div>
